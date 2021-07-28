@@ -216,4 +216,10 @@ public abstract class BaseMonster {
         battleMoves[2] = bm2;
         battleMoves[3] = bm3;
     }
+    
+    public void checkMonsterStatus(){
+        if(this.currentHp <= 0){
+            this.status = Status.FAINT;
+        }
+    }
 }
