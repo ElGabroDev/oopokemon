@@ -158,11 +158,7 @@ public class Battle {
         
     }
     
-    public void completeTurn(){
-        completeRound();        
-        completeRound();
-    }
-    
+       
     public GameStatus checkGameStatus(){
         if(this.battleGround.getAttacker().getCurrentHp() <= 0){
             return GameStatus.OVER;

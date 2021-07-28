@@ -35,7 +35,8 @@ public abstract class BaseMonster {
     
     protected BattleMove[] battleMoves = new BattleMove[4];
     
-    
+    protected Status status = Status.GOOD;
+
     public BaseMonster(String name, int hp){
         this.name = name;
         this.hp = hp;
@@ -199,6 +200,14 @@ public abstract class BaseMonster {
 
     public void setBattleMoves(BattleMove[] battleMoves) {
         this.battleMoves = battleMoves;
+    }
+    
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
     
     public void fastMoveSet(BattleMove bm0, BattleMove bm1, BattleMove bm2, BattleMove bm3){
