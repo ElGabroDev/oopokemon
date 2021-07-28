@@ -68,12 +68,19 @@ public class Battle {
         }
 
         selection = 0;
+        
+        
+        // TODO: Sistemare selezione obbligata di numero intero! 
+        try{
+            selection = battleScanner.nextInt();
+        }catch(Exception e){
+            System.out.println("Immetti un numero 0-3");
+        }
 
         while (!isSelected) {
 
-            selection = battleScanner.nextInt();
-
-            if (selection > 0 && selection < 3) {
+            
+            if (selection >= 0 && selection <= 3) {
                 isSelected = true;
             } else {
                 System.out.println("Non valido, inserisci un numero valido");
@@ -81,8 +88,8 @@ public class Battle {
             }
 
             isSelected = ensurePP(this.battleGround.getAttacker().getBattleMoves()[selection].getCurrentUses());
-        }
 
+        }
         System.out.println("Hai scelto -> " + this.battleGround.getAttacker().getBattleMoves()[selection].getMoveName());
         this.battleGround.getAttacker().getBattleMoves()[selection].setCurrentUses(this.battleGround.getAttacker().getBattleMoves()[selection].getCurrentUses() - 1);
         return this.battleGround.getAttacker().getBattleMoves()[selection];

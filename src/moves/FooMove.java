@@ -15,7 +15,7 @@ import monsters.Type;
 public class FooMove extends BattleMove{
 
     public FooMove() {
-        super("---", 0, 0, Type.FIRE, DamageType.CONDITION, 10);
+        super("---", 0, 0, Type.FIRE, DamageType.CONDITION, 1);
     }
 
     
