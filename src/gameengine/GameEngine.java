@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package gameengine;
+import java.io.File;
+import javax.print.attribute.standard.Media;
 import monsters.*;
 import moves.*;
 /**
@@ -20,7 +22,7 @@ public class GameEngine {
         //name, hp, vel, attack, defense, spAttack, spDefense
         
         MonsterFire charmander = new MonsterFire("Charmander", 100, 10, 10, 10, 10, 10);
-        MonsterWater squirtle = new MonsterWater("Squirtle", 100, 10, 10, 10, 10, 10);
+        MonsterWater squirtle = new MonsterWater("Squirtle", 100, 12, 10, 10, 10, 10);
         
         charmander.fastMoveSet(new FireBall(), new LeechSeed(), new FooMove(), new FireBall());
         squirtle.fastMoveSet(new WaterGun(), new WaterGun(), new WaterGun(), new WaterGun());
@@ -28,8 +30,9 @@ public class GameEngine {
         BattleGround battleGround = new BattleGround(charmander, squirtle);
         Battle battle = new Battle(battleGround);
         
+        
         while(battle.getGameStatus() != GameStatus.OVER){
-            battle.completeRound();
+            battle.completeTurn();
         }
     }
     

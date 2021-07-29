@@ -52,6 +52,9 @@ public class Battle {
     public void setNextAttacker() {
         if (this.battleGround.getDefender().getCurrentVel() > this.battleGround.getAttacker().getCurrentVel()) {
             switchAttackerDefender();
+        } else if (this.battleGround.getDefender().getCurrentVel() == this.battleGround.getAttacker().getCurrentVel()){
+            int i = RNG.roll10();
+            if(i <= 5) switchAttackerDefender();
         }
     }
 
@@ -191,8 +194,15 @@ public class Battle {
         System.out.println("");
         this.battleGround.getAttacker().checkMonsterStatus();
         this.battleGround.getDefender().checkMonsterStatus();
+        
         this.gameStatus = checkGameStatus();
 
+    }
+    
+    public void completeTurn(){
+        completeRound();
+        completeRound();
+        setNextAttacker();
     }
 
     public GameStatus checkGameStatus() {

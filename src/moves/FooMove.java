@@ -15,14 +15,16 @@ import monsters.Type;
 public class FooMove extends BattleMove{
 
     public FooMove() {
-        super("---", 0, 0, Type.FIRE, DamageType.CONDITION, 1);
+        super("---", 0, 0, Type.FIRE, DamageType.CONDITION, 3);
     }
 
     
     
     @Override
     public void effect(BattleGround battleGround) {
-        // NO Effect
+        battleGround.getAttacker().setCurrentVel(battleGround.getAttacker().getCurrentVel() + 10);
+        System.out.println("Aumenta velocità di " + battleGround.getAttacker().getName());
+        System.out.println(battleGround.getAttacker().getCurrentVel() + "/" + battleGround.getAttacker().getVel());
     }
     
 }
