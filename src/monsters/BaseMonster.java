@@ -218,6 +218,18 @@ public abstract class BaseMonster {
     }
     
     public void checkMonsterStatus(){
+        checkMonsterPoison();
+        checkMonsterFaint();
+    }
+    
+    public void checkMonsterPoison(){
+        if(this.status == Status.POISONED){
+            System.out.println(this.name + " è avvelenato, perde 10 ps");
+            this.currentHp -= 5;
+        }
+    }
+    
+    public void checkMonsterFaint(){
         if(this.currentHp <= 0){
             this.status = Status.FAINT;
         }

@@ -6,6 +6,7 @@
 package moves;
 
 import gameengine.BattleGround;
+import monsters.Status;
 import monsters.Type;
 
 /**
@@ -25,6 +26,8 @@ public class FooMove extends BattleMove{
         battleGround.getAttacker().setCurrentVel(battleGround.getAttacker().getCurrentVel() + 10);
         System.out.println("Aumenta velocità di " + battleGround.getAttacker().getName());
         System.out.println(battleGround.getAttacker().getCurrentVel() + "/" + battleGround.getAttacker().getVel());
+        
+        battleGround.getDefender().setStatus(Status.POISONED);
     }
     
 }

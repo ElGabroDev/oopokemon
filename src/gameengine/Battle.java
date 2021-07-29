@@ -52,9 +52,11 @@ public class Battle {
     public void setNextAttacker() {
         if (this.battleGround.getDefender().getCurrentVel() > this.battleGround.getAttacker().getCurrentVel()) {
             switchAttackerDefender();
-        } else if (this.battleGround.getDefender().getCurrentVel() == this.battleGround.getAttacker().getCurrentVel()){
+        } else if (this.battleGround.getDefender().getCurrentVel() == this.battleGround.getAttacker().getCurrentVel()) {
             int i = RNG.roll10();
-            if(i <= 5) switchAttackerDefender();
+            if (i <= 5) {
+                switchAttackerDefender();
+            }
         }
     }
 
@@ -72,12 +74,11 @@ public class Battle {
 
         // TODO: Sistemare inputmismatch su selection;
         selection = 5;
-        
-            
+
         while (!isSelected) {
-                   
+
             selection = battleScanner.nextInt();
-            
+
             if (selection >= 0 && selection <= 3) {
                 isSelected = true;
             } else {
@@ -88,7 +89,7 @@ public class Battle {
             isSelected = ensurePP(this.battleGround.getAttacker().getBattleMoves()[selection].getCurrentUses());
 
         }
-        
+
         System.out.println("Hai scelto -> " + this.battleGround.getAttacker().getBattleMoves()[selection].getMoveName());
         this.battleGround.getAttacker().getBattleMoves()[selection].setCurrentUses(this.battleGround.getAttacker().getBattleMoves()[selection].getCurrentUses() - 1);
         return this.battleGround.getAttacker().getBattleMoves()[selection];
@@ -190,20 +191,26 @@ public class Battle {
         System.out.println("");
         this.battleGround.getAttacker().checkMonsterStatus();
         this.battleGround.getDefender().checkMonsterStatus();
-        
+
         this.gameStatus = checkGameStatus();
 
     }
-    
-    public void completeTurn(){
+
+    public void completeTurn() {
         completeRound();
-        completeRound();
-        setNextAttacker();
+        if(gameStatus != GameStatus.OVER){
+            completeRound();
+            setNextAttacker();
+        }
+        
     }
 
     public GameStatus checkGameStatus() {
         if (this.battleGround.getAttacker().getStatus() == Status.FAINT) {
             promptWinnerLoser(this.battleGround.getDefender(), this.battleGround.getAttacker());
+            return GameStatus.OVER;
+        } else if (this.battleGround.getDefender().getStatus() == Status.FAINT) {
+            promptWinnerLoser(this.battleGround.getAttacker(), this.battleGround.getDefender());
             return GameStatus.OVER;
         } else {
             return GameStatus.CONTINUE;

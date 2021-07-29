@@ -25,7 +25,7 @@ public class GameEngine {
         MonsterWater squirtle = new MonsterWater("Squirtle", 100, 10, 10, 10, 10, 10);
         
         charmander.fastMoveSet(new FireBall(), new LeechSeed(), new FooMove(), new FireBall());
-        squirtle.fastMoveSet(new WaterGun(), new WaterGun(), new WaterGun(), new WaterGun());
+        squirtle.fastMoveSet(new WaterGun(), new LeechSeed(), new WaterGun(), new WaterGun());
         
         BattleGround battleGround = new BattleGround(charmander, squirtle);
         Battle battle = new Battle(battleGround);
