@@ -5,6 +5,7 @@
  */
 package monsters;
 
+import gameengine.RNG;
 import moves.BattleMove;
 
 /**
@@ -32,6 +33,7 @@ public abstract class BaseMonster {
     protected int currentSpDef;
     
     protected Type type;
+    private int probabilityEnancher = 0;
     
     protected BattleMove[] battleMoves = new BattleMove[4];
     
@@ -219,19 +221,53 @@ public abstract class BaseMonster {
     
     public void checkMonsterStatus(){
         checkMonsterPoison();
+        checkMonsterBurnt();
         checkMonsterFaint();
     }
     
     public void checkMonsterPoison(){
+        
+        int i = RNG.roll10();
+        
         if(this.status == Status.POISONED){
             System.out.println(this.name + " è avvelenato, perde 10 ps");
             this.currentHp -= 5;
+            this.probabilityEnancher += 1;
         }
+        
+        if(i + this.probabilityEnancher > 11){
+            cureStatus();
+            this.probabilityEnancher = 0;
+        }
+        
+    }
+    
+    public void checkMonsterBurnt(){
+        
+        int i = RNG.roll10();
+        int burnDamage = 5 + (int)(i/2) + this.probabilityEnancher;
+        
+        if(this.status == Status.BURNT){
+            System.out.println(this.name + " è scottato, perde " + burnDamage + " ps");
+            this.currentHp -= burnDamage;
+            this.probabilityEnancher += 1;
+        }
+        
+        if(i + this.probabilityEnancher > 11){
+            cureStatus();
+            this.probabilityEnancher = 0;
+        }
+        
     }
     
     public void checkMonsterFaint(){
         if(this.currentHp <= 0){
             this.status = Status.FAINT;
         }
+    }
+    
+    public void cureStatus(){
+        System.out.println(this.name + " Guarisce dalla condizione di stato");
+        this.status = Status.GOOD;
     }
 }
