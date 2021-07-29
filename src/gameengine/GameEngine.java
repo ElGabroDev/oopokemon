@@ -22,7 +22,7 @@ public class GameEngine {
         //name, hp, vel, attack, defense, spAttack, spDefense
         
         MonsterFire charmander = new MonsterFire("Charmander", 100, 10, 10, 10, 10, 10);
-        MonsterWater squirtle = new MonsterWater("Squirtle", 100, 12, 10, 10, 10, 10);
+        MonsterWater squirtle = new MonsterWater("Squirtle", 100, 10, 10, 10, 10, 10);
         
         charmander.fastMoveSet(new FireBall(), new LeechSeed(), new FooMove(), new FireBall());
         squirtle.fastMoveSet(new WaterGun(), new WaterGun(), new WaterGun(), new WaterGun());
