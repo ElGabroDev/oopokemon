@@ -118,6 +118,16 @@ public class Battle {
         boolean isEffective = false;
         boolean isResistant = false;
         boolean isSTAB = false;
+        
+        if(this.battleGround.getAttacker().getStatus() == Status.SLEEP){
+            System.out.println(this.battleGround.getAttacker().getName() + " salta il turno per il sonno");
+            return;
+        }
+        
+        if((this.battleGround.getAttacker().getStatus() == Status.PARALYZED) && (RNG.roll10() >= 5)){
+            System.out.println(this.battleGround.getAttacker().getName() + " non può attaccare");
+            return;
+        }
 
         if (moveSelected.getDamageType() == DamageType.PHYSICAL) {
             baseAttack = this.battleGround.getAttacker().getCurrentAttack();
@@ -142,6 +152,7 @@ public class Battle {
         if (moveSelected.getType() == this.battleGround.getAttacker().getType()) {
             isSTAB = true;
         }
+        
 
         if (moveSelected.getDamageType() == DamageType.PHYSICAL || moveSelected.getDamageType() == DamageType.SPECIAL) {
             damage = (int) (basePower * effectiveCheck(isEffective) * resistanceCheck(isResistant) * stabCheck(isSTAB));

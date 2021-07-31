@@ -220,6 +220,8 @@ public abstract class BaseMonster {
     }
     
     public void checkMonsterStatus(){
+        checkMonsterSleep();
+        checkMonsterParalysis();
         checkMonsterPoison();
         checkMonsterBurnt();
         checkMonsterFaint();
@@ -240,6 +242,36 @@ public abstract class BaseMonster {
             this.probabilityEnancher = 0;
         }
         
+    }
+    
+    public void checkMonsterParalysis(){
+       
+        int i = RNG.roll10();
+        
+        if(this.status == Status.PARALYZED){
+            System.out.println(this.name + " è paralizzato, non può muoversi");
+            this.probabilityEnancher += 1;
+        }
+        
+        if(i + this.probabilityEnancher > 11){
+            cureStatus();
+            this.probabilityEnancher = 0;
+        }
+    
+    }
+    
+    public void checkMonsterSleep(){
+        int i = RNG.roll10();
+        
+        if(this.status == Status.SLEEP){
+            System.out.println(this.name + " è addormentato, non può muoversi");
+            this.probabilityEnancher += 1;
+        }
+        
+        if(i + this.probabilityEnancher > 11){
+            cureStatus();
+            this.probabilityEnancher = 0;
+        }
     }
     
     public void checkMonsterBurnt(){

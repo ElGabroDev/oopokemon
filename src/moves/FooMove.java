@@ -27,7 +27,7 @@ public class FooMove extends BattleMove{
         System.out.println("Aumenta velocità di " + battleGround.getAttacker().getName());
         System.out.println(battleGround.getAttacker().getCurrentVel() + "/" + battleGround.getAttacker().getVel());
         
-        battleGround.getDefender().setStatus(Status.BURNT);
+        battleGround.getDefender().setStatus(Status.SLEEP);
     }
     
 }
